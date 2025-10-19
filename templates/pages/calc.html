@@ -1,0 +1,20 @@
+<!-- templates/pages/calc.html -->
+{% extends 'base.html' %}
+{% block title %}Калькулятор{% endblock %}
+{% block content %}
+  <h1>Калькулятор</h1>
+  <form method="get" class="card">
+    <label>A</label><input type="text" name="a" value="{{ a|default:'' }}">
+    <label>B</label><input type="text" name="b" value="{{ b|default:'' }}">
+    <label>Операция</label>
+    <select name="op">
+      <option value="add" {% if op == 'add' %}selected{% endif %}>A + B</option>
+      <option value="sub" {% if op == 'sub' %}selected{% endif %}>A − B</option>
+      <option value="mul" {% if op == 'mul' %}selected{% endif %}>A × B</option>
+      <option value="div" {% if op == 'div' %}selected{% endif %}>A ÷ B</option>
+    </select>
+    <button type="submit">Посчитать</button>
+  </form>
+  {% if error %}<div class="msg err">{{ error }}</div>{% endif %}
+  {% if result is not None %}<div class="msg">Результат: <b>{{ result }}</b></div>{% endif %}
+{% endblock %}

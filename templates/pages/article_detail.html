@@ -1,0 +1,7 @@
+<!-- templates/pages/article_detail.html -->
+{% extends 'base.html' %}
+{% block title %}Статья{% endblock %}
+{% block content %}
+  <h1>{{ article.title }}</h1>
+  <p>{{ article.body }}</p>
+{% endblock %}
