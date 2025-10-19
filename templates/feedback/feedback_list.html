@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %}Список отзывов{% endblock %}
+{% block content %}
+  <h1>Список отзывов</h1>
+  <p><a href="{% url 'feedback-create' %}">Оставить отзыв</a></p>
+  <ul class="items">
+  {% for f in page_obj %}
+    <li>
+      <b>{{ f.name }}</b> — <small>{{ f.created_at|date:'d.m.Y H:i' }}</small><br>
+      <i>{{ f.email }}</i><br>
+      {{ f.message }}
+    </li>
+  {% empty %}
+    <li>Пока нет отзывов</li>
+  {% endfor %}
+  </ul>
+
+  {% if page_obj.paginator.num_pages > 1 %}
+    <nav class="pagination">
+      {% if page_obj.has_previous %}<a href="?page={{ page_obj.previous_page_number }}">« Назад</a>{% endif %}
+      <span>Стр. {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}</span>
+      {% if page_obj.has_next %}<a href="?page={{ page_obj.next_page_number }}">Вперёд »</a>{% endif %}
+    </nav>
+  {% endif %}
+{% endblock %}
